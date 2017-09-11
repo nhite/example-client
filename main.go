@@ -13,7 +13,7 @@ import (
 	"strings"
 
 	"github.com/kelseyhightower/envconfig"
-	"github.com/owulveryck/cli-grpc-example/terraform-grpc/tfgrpc"
+	pb "github.com/nhite/pb-nhite"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials"
@@ -47,8 +47,8 @@ func main() {
 	if len(os.Args) < 2 {
 		log.Fatal("Wrong numbers of arguments")
 	}
-	client := tfgrpc.NewTerraformClient(conn)
-	output := &tfgrpc.Output{}
+	client := pb.NewTerraformClient(conn)
+	output := &pb.Output{}
 	switch os.Args[1] {
 	case "push":
 
@@ -123,7 +123,7 @@ func main() {
 		if err != nil {
 			log.Fatal("Cannot create grpc push client", err)
 		}
-		err = pushClient.Send(&tfgrpc.Body{
+		err = pushClient.Send(&pb.Body{
 			Zipfile: buf.Bytes(),
 		})
 		if err != nil {
@@ -136,17 +136,17 @@ func main() {
 		fmt.Println(id.Tmpdir)
 
 	case "init":
-		output, err = client.Init(context.Background(), &tfgrpc.Arg{
+		output, err = client.Init(context.Background(), &pb.Arg{
 			os.Args[2],
 			os.Args[3:],
 		})
 	case "plan":
-		output, err = client.Plan(context.Background(), &tfgrpc.Arg{
+		output, err = client.Plan(context.Background(), &pb.Arg{
 			os.Args[2],
 			os.Args[3:],
 		})
 	case "apply":
-		output, err = client.Apply(context.Background(), &tfgrpc.Arg{
+		output, err = client.Apply(context.Background(), &pb.Arg{
 			os.Args[2],
 			os.Args[3:],
 		})
