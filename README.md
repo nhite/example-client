@@ -1,2 +1,3 @@
 # example-client
-A simple go client for the nhite engine
+
+A very simple and dirty client for the `nhite` engine
