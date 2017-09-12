@@ -19,7 +19,7 @@ import (
 	"google.golang.org/grpc/credentials"
 )
 
-const envPrefix = "TAAS_CLIENT"
+const envPrefix = "NHITE_CLIENT"
 
 type configuration struct {
 	CertFile    string `envconfig:"CERT_FILE" required:"true"`
