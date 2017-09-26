@@ -133,7 +133,7 @@ func main() {
 		if err != nil {
 			log.Fatal("Received returned an error", err)
 		}
-		fmt.Println(id.Tmpdir)
+		fmt.Println(id.Sha256)
 
 	case "init":
 		output, err = client.Init(context.Background(), &pb.Arg{
