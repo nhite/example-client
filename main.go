@@ -22,8 +22,8 @@ import (
 const envPrefix = "NHITE_CLIENT"
 
 type configuration struct {
-	CertFile    string `envconfig:"CERT_FILE" required:"true"`
-	TaaSAddress string `envconfig:"TAAS_ADDRESS" required:"true"`
+	CertFile     string `envconfig:"CERT_FILE" required:"true"`
+	NhiteAddress string `envconfig:"NHITE_ADDRESS" required:"true"`
 }
 
 func main() {
@@ -39,7 +39,7 @@ func main() {
 	if err != nil {
 		log.Fatal("Cannot load certificate ", err)
 	}
-	conn, err := grpc.Dial(config.TaaSAddress, grpc.WithTransportCredentials(creds))
+	conn, err := grpc.Dial(config.NhiteAddress, grpc.WithTransportCredentials(creds))
 	if err != nil {
 		log.Fatal("Cannot reach grpc server", err)
 	}
